@@ -1,0 +1,10 @@
+discord.py
+transformers
+torch
+tensorflow
+scikit-learn
+numpy
+pandas
+nltk
+pillow
+opencv-python

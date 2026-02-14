@@ -27,15 +27,12 @@ Sive-Discord-ML/
 ├── DISCORD_SETUP.md           # Discord setup guide
 └──🎮 Discord Bot Commands
 
-### ML Commands
 - `>>analyze <text>` - Analyze sentiment of text
 - `>>chat <message>` - Chat with AI (remembers context!)
 - `>>resetchat` - Reset your chat history
 - `>>moderate <text>` - Check if content is appropriate
 - `>>generate <prompt>` - Generate creative text
 - `>>qa <context> | <question>` - Answer questions
-
-### Utility Commands
 - `>>purge <amount>` - Delete messages from channel (requires Manage Messages)
 - `>>clear <amount>` - Delete only your own messages
 - `>>models` - Show all available models

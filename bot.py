@@ -22,7 +22,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 # Bot setup
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='>>', intents=intents)
+bot = commands.Bot(command_prefix='>>', intents=intents, help_command=None)
 
 # ML Models - Lazy Loading (loaded only when first used)
 sentiment_analyzer = None
@@ -238,6 +238,82 @@ async def show_models(ctx):
     )
     
     await ctx.send(embed=embed)
+
+
+@bot.command(name='help', help='Show all available commands')
+async def help_command(ctx, command_name: str = None):
+    """Custom help command with embed"""
+    if command_name:
+        # Show help for specific command
+        command = bot.get_command(command_name)
+        if command:
+            embed = discord.Embed(
+                title=f"ℹ️ Help: >>{command.name}",
+                description=command.help or "No description available",
+                color=discord.Color.blue()
+            )
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send(f"⚠️ Command `{command_name}` not found. Use `>>help` to see all commands.")
+    else:
+        # Show all commands
+        embed = discord.Embed(
+            title="📚 Sive Discord ML Bot - Commands",
+            description="Here are all available commands. Use `>>help <command>` for more details.",
+            color=discord.Color.green()
+        )
+        
+        embed.add_field(
+            name="📊 >>analyze <text>",
+            value="Analyze sentiment and emotions in text",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="💬 >>chat <message>",
+            value="Chat with AI that remembers your conversation",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="🔄 >>resetchat",
+            value="Reset your conversation history",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="⚠️ >>moderate <text>",
+            value="Check if content is toxic or inappropriate",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="✨ >>generate <prompt>",
+            value="Generate creative text from a prompt",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="❓ >>qa <context> | <question>",
+            value="Answer questions based on provided context",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="🤖 >>models",
+            value="Show all available ML models",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="ℹ️ >>help [command]",
+            value="Show this help message or help for a specific command",
+            inline=False
+        )
+        
+        embed.set_footer(text="Powered by Hugging Face Transformers 🤗")
+        
+        await ctx.send(embed=embed)
 
 
 @bot.event

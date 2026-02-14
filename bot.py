@@ -136,6 +136,56 @@ async def reset_chat(ctx):
         await ctx.send("You don't have an active conversation.")
 
 
+@bot.command(name='purge', help='Delete messages from channel. Usage: >>purge <amount>')
+@commands.has_permissions(manage_messages=True)
+async def purge_messages(ctx, amount: int = 10):
+    """Delete a specified number of messages from the channel"""
+    if amount < 1 or amount > 100:
+        await ctx.send("⚠️ Please specify a number between 1 and 100.")
+        return
+    
+    try:
+        # Delete the command message and the specified number of messages
+        deleted = await ctx.channel.purge(limit=amount + 1)
+        
+        # Send confirmation message
+        confirmation = await ctx.send(f"🗑️ Successfully deleted {len(deleted) - 1} message(s).")
+        
+        # Auto-delete confirmation after 5 seconds
+        await confirmation.delete(delay=5)
+        
+    except discord.Forbidden:
+        await ctx.send("❌ I don't have permission to delete messages in this channel.")
+    except discord.HTTPException as e:
+        await ctx.send(f"❌ An error occurred while deleting messages: {str(e)}")
+
+
+@bot.command(name='clear', help='Clear your messages only. Usage: >>clear <amount>')
+async def clear_own_messages(ctx, amount: int = 10):
+    """Delete only the command user's messages"""
+    if amount < 1 or amount > 100:
+        await ctx.send("⚠️ Please specify a number between 1 and 100.")
+        return
+    
+    try:
+        def is_author(message):
+            return message.author == ctx.author
+        
+        # Delete the command message and user's messages
+        deleted = await ctx.channel.purge(limit=amount + 50, check=is_author)
+        
+        # Send confirmation message
+        confirmation = await ctx.send(f"🗑️ Successfully deleted {len(deleted)} of your message(s).")
+        
+        # Auto-delete confirmation after 5 seconds
+        await confirmation.delete(delay=5)
+        
+    except discord.Forbidden:
+        await ctx.send("❌ I don't have permission to delete messages in this channel.")
+    except discord.HTTPException as e:
+        await ctx.send(f"❌ An error occurred while deleting messages: {str(e)}")
+
+
 @bot.command(name='moderate', help='Check if text is inappropriate. Usage: >>moderate <text>')
 async def moderate_content(ctx, *, text: str):
     """Check if content is toxic or inappropriate"""
@@ -282,6 +332,18 @@ async def help_command(ctx, command_name: str = None):
         )
         
         embed.add_field(
+            name="🗑️ >>purge <amount>",
+            value="Delete messages from channel (requires Manage Messages permission)",
+            inline=False
+        )
+        
+        embed.add_field(
+            name="🧹 >>clear <amount>",
+            value="Delete only your own messages",
+            inline=False
+        )
+        
+        embed.add_field(
             name="⚠️ >>moderate <text>",
             value="Check if content is toxic or inappropriate",
             inline=False
@@ -323,6 +385,10 @@ async def on_command_error(ctx, error):
         await ctx.send(f"⚠️ Missing required argument. Use `>>help {ctx.command}` for usage info.")
     elif isinstance(error, commands.CommandNotFound):
         await ctx.send("⚠️ Command not found. Use `>>help` to see all commands.")
+    elif isinstance(error, commands.MissingPermissions):
+        await ctx.send("❌ You don't have permission to use this command.")
+    elif isinstance(error, commands.BotMissingPermissions):
+        await ctx.send("❌ I don't have the required permissions to execute this command.")
     else:
         await ctx.send(f"❌ An error occurred: {str(error)}")
         print(f"Error: {error}")

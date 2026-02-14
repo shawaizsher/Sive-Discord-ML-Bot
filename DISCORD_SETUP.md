@@ -31,6 +31,7 @@
    - ✅ Send Messages
    - ✅ Embed Links
    - ✅ Read Message History
+   - ✅ Manage Messages (required for >>purge command)
    - ✅ Use Slash Commands
 4. Copy the generated URL and open it in your browser
 5. Select your server and authorize the bot
@@ -102,6 +103,18 @@ Shows all available ML models and their commands.
 >>help
 ```
 Shows all available commands.
+
+### 🗑️ Purge Messages (Admin)
+```
+>>purge 10
+```
+Deletes the specified number of messages from the channel. Requires **Manage Messages** permission.
+
+### 🧹 Clear Your Messages
+```
+>>clear 5
+```
+Deletes only your own messages (doesn't require special permissions).
 
 ## Troubleshooting
 

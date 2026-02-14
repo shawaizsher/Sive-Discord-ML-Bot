@@ -117,11 +117,7 @@ async def chat_with_bot(ctx, *, message: str):
         user_bot = get_user_chatbot(user_id)
         response = user_bot.respond(message)
         
-        embed = discord.Embed(title="💬 AI Chat", color=discord.Color.green())
-        embed.add_field(name="You", value=message[:1000], inline=False)
-        embed.add_field(name="Bot", value=response[:1000], inline=False)
-        
-        await ctx.send(embed=embed)
+        await ctx.send(response)
 
 
 @bot.command(name='resetchat', help='Reset your conversation history')

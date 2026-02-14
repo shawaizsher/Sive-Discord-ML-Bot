@@ -92,7 +92,7 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name=">>help for commands"))
 
 
-@bot.command(name='analyze', help='Analyze sentiment of text. Usage: !analyze <text>')
+@bot.command(name='analyze', help='Analyze sentiment of text. Usage: >>analyze <text>')
 async def analyze_sentiment(ctx, *, text: str):
     """Analyze sentiment of the given text"""
     async with ctx.typing():
@@ -108,7 +108,7 @@ async def analyze_sentiment(ctx, *, text: str):
         await ctx.send(embed=embed)
 
 
-@bot.command(name='chat', help='Chat with AI. Usage: !chat <message>')
+@bot.command(name='chat', help='Chat with AI. Usage: >>chat <message>')
 async def chat_with_bot(ctx, *, message: str):
     """Have a conversation with the AI chatbot"""
     async with ctx.typing():
@@ -136,7 +136,7 @@ async def reset_chat(ctx):
         await ctx.send("You don't have an active conversation.")
 
 
-@bot.command(name='moderate', help='Check if text is inappropriate. Usage: !moderate <text>')
+@bot.command(name='moderate', help='Check if text is inappropriate. Usage: >>moderate <text>')
 async def moderate_content(ctx, *, text: str):
     """Check if content is toxic or inappropriate"""
     async with ctx.typing():
@@ -156,7 +156,7 @@ async def moderate_content(ctx, *, text: str):
         await ctx.send(embed=embed)
 
 
-@bot.command(name='generate', help='Generate text from prompt. Usage: !generate <prompt>')
+@bot.command(name='generate', help='Generate text from prompt. Usage: >>generate <prompt>')
 async def generate_text(ctx, *, prompt: str):
     """Generate creative text from a prompt"""
     async with ctx.typing():
@@ -174,13 +174,13 @@ async def generate_text(ctx, *, prompt: str):
         await ctx.send(embed=embed)
 
 
-@bot.command(name='qa', help='Ask a question with context. Usage: !qa <context> | <question>')
+@bot.command(name='qa', help='Ask a question with context. Usage: >>qa <context> | <question>')
 async def question_answer(ctx, *, text: str):
     """Answer questions based on provided context"""
     async with ctx.typing():
         # Split by | to separate context and question
         if '|' not in text:
-            await ctx.send("⚠️ Please use format: `!qa <context> | <question>`\nExample: `!qa AI is artificial intelligence | What is AI?`")
+            await ctx.send("⚠️ Please use format: `>>qa <context> | <question>`\nExample: `>>qa AI is artificial intelligence | What is AI?`")
             return
         
         parts = text.split('|', 1)
@@ -208,31 +208,31 @@ async def show_models(ctx):
     )
     
     embed.add_field(
-        name="📊 Sentiment Analysis (!analyze)",
+        name="📊 Sentiment Analysis (>>analyze)",
         value="Detects emotions and sentiment in text",
         inline=False
     )
     
     embed.add_field(
-        name="💬 Chatbot (!chat)",
+        name="💬 Chatbot (>>chat)",
         value="Conversational AI that remembers context",
         inline=False
     )
     
     embed.add_field(
-        name="⚠️ Content Moderation (!moderate)",
+        name="⚠️ Content Moderation (>>moderate)",
         value="Detects toxic or inappropriate content",
         inline=False
     )
     
     embed.add_field(
-        name="✨ Text Generation (!generate)",
+        name="✨ Text Generation (>>generate)",
         value="Generates creative text from prompts",
         inline=False
     )
     
     embed.add_field(
-        name="❓ Q&A System (!qa)",
+        name="❓ Q&A System (>>qa)",
         value="Answers questions based on context",
         inline=False
     )
@@ -244,9 +244,9 @@ async def show_models(ctx):
 async def on_command_error(ctx, error):
     """Handle command errors"""
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f"⚠️ Missing required argument. Use `!help {ctx.command}` for usage info.")
+        await ctx.send(f"⚠️ Missing required argument. Use `>>help {ctx.command}` for usage info.")
     elif isinstance(error, commands.CommandNotFound):
-        await ctx.send("⚠️ Command not found. Use `!help` to see all commands.")
+        await ctx.send("⚠️ Command not found. Use `>>help` to see all commands.")
     else:
         await ctx.send(f"❌ An error occurred: {str(error)}")
         print(f"Error: {error}")

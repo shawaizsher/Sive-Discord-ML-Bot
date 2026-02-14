@@ -27,14 +27,14 @@ Sive-Discord-ML/
 ├── DISCORD_SETUP.md           # Discord setup guide
 └──🎮 Discord Bot Commands
 
-- `!analyze <text>` - Analyze sentiment of text
-- `!chat <message>` - Chat with AI (remembers context!)
-- `!resetchat` - Reset your chat history
-- `!moderate <text>` - Check if content is appropriate
-- `!generate <prompt>` - Generate creative text
-- `!qa <context> | <question>` - Answer questions
-- `!models` - Show all available models
-- `!help` - Show all commands
+- `>>analyze <text>` - Analyze sentiment of text
+- `>>chat <message>` - Chat with AI (remembers context!)
+- `>>resetchat` - Reset your chat history
+- `>>moderate <text>` - Check if content is appropriate
+- `>>generate <prompt>` - Generate creative text
+- `>>qa <context> | <question>` - Answer questions
+- `>>models` - Show all available models
+- `>>help` - Show all commands
 
 ## 🛠️ Development
 

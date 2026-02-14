@@ -58,48 +58,48 @@ YourBotName#1234 has connected to Discord!
 
 ### 📊 Sentiment Analysis
 ```
-!analyze I love this bot!
+>>analyze I love this bot!
 ```
 Analyzes the sentiment and emotion of your text.
 
 ### 💬 AI Chatbot
 ```
-!chat Hello, how are you?
+>>chat Hello, how are you?
 ```
 Have a conversation with the AI. It remembers your conversation history!
 
 ```
-!resetchat
+>>resetchat
 ```
 Reset your conversation history.
 
 ### ⚠️ Content Moderation
 ```
-!moderate Is this message appropriate?
+>>moderate Is this message appropriate?
 ```
 Checks if content is toxic or inappropriate.
 
 ### ✨ Text Generation
 ```
-!generate Once upon a time in a magical forest
+>>generate Once upon a time in a magical forest
 ```
 Generates creative text from your prompt.
 
 ### ❓ Question Answering
 ```
-!qa Python is a programming language | What is Python?
+>>qa Python is a programming language | What is Python?
 ```
-Format: `!qa <context> | <question>`
+Format: `>>qa <context> | <question>`
 
 ### 🤖 View All Models
 ```
-!models
+>>models
 ```
 Shows all available ML models and their commands.
 
 ### ℹ️ Help
 ```
-!help
+>>help
 ```
 Shows all available commands.
 
@@ -120,7 +120,7 @@ Shows all available commands.
 
 ## Tips
 
-- The bot uses `!` as the command prefix
+- The bot uses `>>` as the command prefix
 - All models are loaded once at startup for better performance
 - Each user has their own chatbot conversation history
 - Responses are formatted with nice embeds for better readability
